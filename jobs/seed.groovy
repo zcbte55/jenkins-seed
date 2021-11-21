@@ -25,6 +25,5 @@ multibranchPipelineJob("/${folderName}/${projectName}") {
         }
       }
     }
-  }
-  removeAction('DELETE')      
+  }   
 }

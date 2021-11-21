@@ -1,4 +1,4 @@
-def projectName = 'aieng-auth-gateway'
+def projectName = 'aieng-conviva'
 def repoUrl = "https://github.com/sky-uk/${projectName}"
 def folderName = 'Builds'
 folder(folderName) {
@@ -26,4 +26,5 @@ multibranchPipelineJob("/${folderName}/${projectName}") {
       }
     }
   }
+  removeAction('DELETE')      
 }

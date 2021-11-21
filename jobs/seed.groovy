@@ -1,6 +1,9 @@
 def projectName = 'aieng-james-test'
 def repoUrl = 'https://github.com/sky-uk/aieng-james-test'
 def folderName = 'Builds'
+folder(folderName) {
+}
+
 multibranchPipelineJob("/${folderName}/${projectName}") {
   displayName "${projectName}"
   description "desc"

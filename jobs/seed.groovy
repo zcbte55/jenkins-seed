@@ -1,5 +1,5 @@
-def projectName = 'aieng-james-test'
-def repoUrl = 'https://github.com/sky-uk/aieng-james-test'
+def projectName = 'aieng-auth-gateway'
+def repoUrl = "https://github.com/sky-uk/${projectName}"
 def folderName = 'Builds'
 folder(folderName) {
 }

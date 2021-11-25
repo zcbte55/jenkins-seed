@@ -1,3 +1,6 @@
+def datas = readYaml file: 'config/repos.yaml'
+print(datas)
+
 def projectName = 'aieng-james-test'
 def repoUrl = "https://github.com/sky-uk/${projectName}"
 def folderName = 'Builds'

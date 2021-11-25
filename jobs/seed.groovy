@@ -1,4 +1,4 @@
-def projectName = 'aieng-conviva'
+def projectName = 'aieng-james-test'
 def repoUrl = "https://github.com/sky-uk/${projectName}"
 def folderName = 'Builds'
 folder(folderName) {

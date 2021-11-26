@@ -8,6 +8,7 @@ options.setDefaultFlowStyle(DumperOptions.FlowStyle.BLOCK)
 def yaml = new Yaml(options)
 
 def repos = yaml.load(fileContent)
+print(repos)
 
 repos.each{ repo -> 
   def repoUrl = "https://github.com/sky-uk/${repo['name']}"

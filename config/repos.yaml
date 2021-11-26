@@ -2,4 +2,5 @@
 repos:
   - name: aieng-james-test
     script: Jenkinsfile
+    url: https://github.com/sky-uk/aieng-james-test
     

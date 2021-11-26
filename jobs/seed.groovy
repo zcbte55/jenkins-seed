@@ -35,10 +35,10 @@ repos.each {
                 strategyId(3)
               }
               gitHubPullRequestDiscovery {
-                strategyId(1)
+                strategyId(2)
               }
               headWildcardFilter {
-                includes(repo.getOrDefault('main PR-*', ''))
+                includes(repo.getOrDefault('include-branches', 'main PR-*'))
                 excludes(repo.getOrDefault('exclude-branches', ''))
               }
             }

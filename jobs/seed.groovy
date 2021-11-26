@@ -27,7 +27,7 @@ repos.each { repo ->
   def folderName = 'Builds'
   folder(folderName) {}
   
-  pipelineJob("/Handlers/${name}") {
+  pipelineJob("/Triggers/${name}") {
     properties {
       disableResume()
       pipelineTriggers {

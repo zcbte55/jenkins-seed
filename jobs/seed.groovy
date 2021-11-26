@@ -40,7 +40,7 @@ repos.each { repo ->
     }
     definition {
       cps {
-        sciprt("build '/Builds/${name}/main' propagate false")
+        script("build '/Builds/${name}/main' propagate false")
         sandbox(true)
       }
     }

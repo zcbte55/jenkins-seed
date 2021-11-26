@@ -1,31 +1,14 @@
 import org.yaml.snakeyaml.DumperOptions
 import org.yaml.snakeyaml.Yaml
 
-def configYaml = '''\
----
-application: "Sample App"
-users:
-- name: "mrhaki"
-  likes:
-  - Groovy
-  - Clojure
-  - Java
-- name: "Hubert"
-  likes:
-  - Apples
-  - Bananas
-connections:
-- "WS1"
-- "WS2"
-'''
+File file = new File('config/repos.yaml')
+String fileContent = file.text
 
 DumperOptions options = new DumperOptions()
 options.setDefaultFlowStyle(DumperOptions.FlowStyle.BLOCK)
 def yaml = new Yaml(options)
 
-def config = yaml.load(configYaml)
-
-assert config.application == 'Sample App'
+def config = yaml.load(fileContent)
 
 print(config)
 def repos = [

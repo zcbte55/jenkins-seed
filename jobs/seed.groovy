@@ -10,12 +10,12 @@ def yaml = new Yaml(options)
 def config = yaml.load(fileContent)
 def repos = config.get('repos')
 
-repos.each{ repo -> 
-  def name = repo.get('name')
+repos.each {
+  repo ->
+    def name = repo.get('name')
   def repoUrl = "https://github.com/sky-uk/${name}"
   def folderName = 'Builds'
-  folder(folderName) {
-  }
+  folder(folderName) {}
 
   multibranchPipelineJob("/${folderName}/${name}") {
     displayName "${name}"
@@ -37,17 +37,27 @@ repos.each{ repo ->
               gitHubPullRequestDiscovery {
                 strategyId(1)
               }
+              headWildcardFilter {
+                includes(repo.getOrDefault('main PR-*', ''))
+                excludes(repo.getOrDefault('exclude-branches', ''))
+              }
             }
           }
         }
         strategy {
-            defaultBranchPropertyStrategy {
-                props {
-                    noTriggerBranchProperty()
-                }
+          defaultBranchPropertyStrategy {
+            props {
+              noTriggerBranchProperty()
             }
+          }
         }
       }
-    }   
+    }
+    orphanedItemStrategy {
+      discardOldItems {
+        daysToKeep repo.getOrDefault('discard-builds-older-than-days', 7)
+        numToKeep repo.getOrDefault('num-builds-to-keep', 10)
+      }
+    }
   }
 }

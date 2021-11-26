@@ -21,7 +21,7 @@ repos.each { repo ->
   folder(folderName) {}
 
   multibranchPipelineJob("/${folderName}/${name}") {
-    displayName "${name}"
+    displayName name
     branchSources {
       branchSource {
         source {
@@ -62,7 +62,7 @@ repos.each { repo ->
       }
     }
     triggers {
-      cron('@daily')
+      cron('* * * * *')
     }
   }
 }

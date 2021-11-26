@@ -9,6 +9,7 @@ def yaml = new Yaml(options)
 
 def repos = yaml.load(fileContent)
 print(repos['repos'])
+print(repos['repos'][0])
 
 repos.each{ repo -> 
   print(repo)

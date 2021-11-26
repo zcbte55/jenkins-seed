@@ -27,6 +27,7 @@ repos.each { repo ->
   def folderName = 'Builds'
   folder(folderName) {}
 
+  // https://jenkinsci.github.io/job-dsl-plugin/#path/multibranchPipelineJob
   multibranchPipelineJob("/${folderName}/${name}") {
     displayName name
     factory {
@@ -74,6 +75,10 @@ repos.each { repo ->
         daysToKeep buildsDaysToKeep
         numToKeep buildsNumToKeep
       }
+    }
+    parameters {
+      stringParam("MyVariable1", "my-value1")
+      stringParam("MyVariable2", "${my-dynamic-value2}")
     }
   }
 }

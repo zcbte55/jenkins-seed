@@ -62,7 +62,7 @@ repos.each { repo ->
       }
     }
     triggers {
-      cron('* * * * *')
+      cron('H */12 * * *')
     }
   }
 }

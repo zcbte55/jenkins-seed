@@ -1,4 +1,6 @@
-import groovy.yaml.YamlSlurper
+import org.yaml.snakeyaml.DumperOptions
+import org.yaml.snakeyaml.Yaml
+
 def configYaml = '''\
 ---
 application: "Sample App"
@@ -17,8 +19,11 @@ connections:
 - "WS2"
 '''
 
-// Parse the YAML.
-def config = new YamlSlurper().parseText(configYaml)
+DumperOptions options = new DumperOptions()
+options.setDefaultFlowStyle(DumperOptions.FlowStyle.BLOCK)
+def yaml = new Yaml(options)
+
+def config = yaml.load(configYaml)
 
 assert config.application == 'Sample App'
 def repos = [

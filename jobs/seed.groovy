@@ -95,8 +95,5 @@ repos.each { repo ->
         numToKeep buildsNumToKeep
       }
     }
-    properties {
-      customIcon('job.png')
-    }
   }
 }

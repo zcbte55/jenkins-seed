@@ -12,7 +12,14 @@ def repos = config.get('repos')
 
 repos.each { repo ->
   def name = repo.get('name')
-  def repoUrl  = repo.get('url')
+  def repoUrl = repo.get('url')
+  def scriptPath = repo.get('script-path', 'Jenkinsfile')
+  def includeBranches = repo.getOrDefault('include-branches', 'main PR-*')
+  def excludeBranches = repo.getOrDefault('exclude-branches', '')
+  def daysToKeep = repo.getOrDefault('days-to-keep', 7)
+  def numToKeep = repo.getOrDefault('num-builds-to-keep', 10)
+  def includePullRequests = repo.getOrDefault('include-pull-requests', true)
+  
   def urlParts = repoUrl.split('/')
   def repoOrg = urlParts[3]
   def repoName = urlParts[4]
@@ -22,6 +29,11 @@ repos.each { repo ->
 
   multibranchPipelineJob("/${folderName}/${name}") {
     displayName name
+    factory {
+      workflowBranchProjectFactory {
+        scriptPath(scriptPath)
+      }
+    }
     branchSources {
       branchSource {
         source {
@@ -36,12 +48,14 @@ repos.each { repo ->
               gitHubBranchDiscovery {
                 strategyId(3)
               }
-              gitHubPullRequestDiscovery {
-                strategyId(2)
+              if (includePullRequests) {
+                gitHubPullRequestDiscovery {
+                  strategyId(2)
+                }
               }
               headWildcardFilter {
-                includes(repo.getOrDefault('include-branches', 'main PR-*'))
-                excludes(repo.getOrDefault('exclude-branches', ''))
+                includes(includeBranches)
+                excludes(excludeBranches)
               }
             }
           }
@@ -57,12 +71,9 @@ repos.each { repo ->
     }
     orphanedItemStrategy {
       discardOldItems {
-        daysToKeep repo.getOrDefault('discard-builds-older-than-days', 7)
-        numToKeep repo.getOrDefault('num-builds-to-keep', 10)
+        daysToKeep daysToKeep
+        numToKeep numToKeep
       }
-    }
-    triggers {
-      cron('* * * * *')
     }
   }
 }

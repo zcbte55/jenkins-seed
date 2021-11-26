@@ -26,6 +26,21 @@ repos.each { repo ->
   
   def folderName = 'Builds'
   folder(folderName) {}
+  
+  pipelineJob("/Handlers/${name}") {
+    properties {
+      disableResume()
+      pipelineTriggers {
+        cron('* * * * *') 
+      }
+    }
+    definition {
+      cps {
+        script("build '/Builds/${name}/main'")
+        sandbox(true)
+      }
+    }
+  }
 
   // https://jenkinsci.github.io/job-dsl-plugin/#path/multibranchPipelineJob
   multibranchPipelineJob("/${folderName}/${name}") {

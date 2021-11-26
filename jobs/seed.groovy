@@ -7,11 +7,10 @@ DumperOptions options = new DumperOptions()
 options.setDefaultFlowStyle(DumperOptions.FlowStyle.BLOCK)
 def yaml = new Yaml(options)
 
-def repos = yaml.load(fileContent)
+def config = yaml.load(fileContent)
+def repos = config.get('repos')
 
-repos.eachWithIndex{ repo, i -> 
-  print(repo)
-  print(repo['name'])
+repos.each{ repo -> 
   def name = repo.get('name')
   def repoUrl = "https://github.com/sky-uk/${name}"
   def folderName = 'Builds'

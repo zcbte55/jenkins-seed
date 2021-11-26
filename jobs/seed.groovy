@@ -34,6 +34,9 @@ repos.each{ repo ->
               gitHubBranchDiscovery {
                 strategyId(3)
               }
+              gitHubPullRequestDiscovery {
+                strategyId(1)
+              }
             }
           }
         }

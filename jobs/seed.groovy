@@ -40,7 +40,7 @@ repos.each { repo ->
     }
     definition {
       cps {
-        script("build '/Builds/${name}/main'")
+        build(job: "/Builds/${name}/main", propogate: false)
         sandbox(true)
       }
     }

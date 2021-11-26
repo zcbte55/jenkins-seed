@@ -10,21 +10,21 @@ def yaml = new Yaml(options)
 def repos = yaml.load(fileContent)
 
 repos.each{ repo -> 
-  def repoUrl = "https://github.com/sky-uk/${repo.name}"
+  def repoUrl = "https://github.com/sky-uk/${repo['name']}"
   def folderName = 'Builds'
   folder(folderName) {
   }
 
-  multibranchPipelineJob("/${folderName}/${repo.name}") {
-    displayName "${repo.name}"
+  multibranchPipelineJob("/${folderName}/${repo['name']}") {
+    displayName "${repo['name']}"
     description "desc"
     branchSources {
       branchSource {
         source {
           github {
-            id "${folderName}/${repo.name}"
+            id "${folderName}/${repo['name']}"
             repositoryUrl "${repoUrl}"
-            repository "${repo.name}"
+            repository "${repo['name']}"
             repoOwner "sky-uk"
             credentialsId "github-bot"
             configuredByUrl true

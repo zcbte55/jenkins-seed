@@ -31,7 +31,9 @@ repos.each { repo ->
     properties {
       disableResume()
       pipelineTriggers {
-        cron('* * * * *') 
+        cron {
+          spec('* * * * *')
+        }
       }
     }
     definition {

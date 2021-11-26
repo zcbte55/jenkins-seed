@@ -11,6 +11,8 @@ def repos = yaml.load(fileContent)
 print(repos['repos'])
 
 repos.each{ repo -> 
+  print(repo)
+  print(repo['name'])
   def repoUrl = "https://github.com/sky-uk/${repo['name']}"
   def folderName = 'Builds'
   folder(folderName) {

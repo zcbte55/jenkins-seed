@@ -16,8 +16,8 @@ repos.each { repo ->
   def scriptFilePath = repo.get('script-path', 'Jenkinsfile')
   def includeBranches = repo.getOrDefault('include-branches', 'main PR-*')
   def excludeBranches = repo.getOrDefault('exclude-branches', '')
-  def daysToKeep = repo.getOrDefault('days-to-keep', 7)
-  def numToKeep = repo.getOrDefault('num-builds-to-keep', 10)
+  def buildsDaysToKeep = repo.getOrDefault('days-to-keep', 7)
+  def buildsNumToKeep = repo.getOrDefault('num-builds-to-keep', 10)
   def includePullRequests = repo.getOrDefault('include-pull-requests', true)
   
   def urlParts = repoUrl.split('/')
@@ -71,8 +71,8 @@ repos.each { repo ->
     }
     orphanedItemStrategy {
       discardOldItems {
-        daysToKeep daysToKeep
-        numToKeep numToKeep
+        daysToKeep buildsDaysToKeep
+        numToKeep buildsNumToKeep
       }
     }
   }

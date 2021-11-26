@@ -37,6 +37,13 @@ repos.each{ repo ->
             }
           }
         }
+        strategy {
+            defaultBranchPropertyStrategy {
+                props {
+                    noTriggerBranchProperty()
+                }
+            }
+        }
       }
     }   
   }

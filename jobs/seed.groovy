@@ -1,7 +1,7 @@
 import org.yaml.snakeyaml.DumperOptions
 import org.yaml.snakeyaml.Yaml
 
-File file = new File('config/repos.yaml')
+File file = new File('../config/repos.yaml')
 String fileContent = file.text
 
 DumperOptions options = new DumperOptions()

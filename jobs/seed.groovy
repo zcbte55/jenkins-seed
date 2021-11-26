@@ -1,32 +1,35 @@
-def datas = readYaml file: 'config/repos.yaml'
-print(datas)
+def repos = [
+  {
+    'name': 'aieng-james-test'
+  }
+]
+repos.each{ repo -> 
+  def repoUrl = "https://github.com/sky-uk/${repo.name}"
+  def folderName = 'Builds'
+  folder(folderName) {
+  }
 
-def projectName = 'aieng-james-test'
-def repoUrl = "https://github.com/sky-uk/${projectName}"
-def folderName = 'Builds'
-folder(folderName) {
-}
-
-multibranchPipelineJob("/${folderName}/${projectName}") {
-  displayName "${projectName}"
-  description "desc"
-  branchSources {
-    branchSource {
-      source {
-        github {
-          id "${folderName}/${projectName}"
-          repositoryUrl "${repoUrl}"
-          repository "${projectName}"
-          repoOwner "sky-uk"
-          credentialsId "github-bot"
-          configuredByUrl true
-          traits {
-            gitHubBranchDiscovery {
-              strategyId(3)
+  multibranchPipelineJob("/${folderName}/${repo.name}") {
+    displayName "${repo.name}"
+    description "desc"
+    branchSources {
+      branchSource {
+        source {
+          github {
+            id "${folderName}/${repo.name}"
+            repositoryUrl "${repoUrl}"
+            repository "${repo.name}"
+            repoOwner "sky-uk"
+            credentialsId "github-bot"
+            configuredByUrl true
+            traits {
+              gitHubBranchDiscovery {
+                strategyId(3)
+              }
             }
           }
         }
       }
-    }
-  }   
+    }   
+  }
 }

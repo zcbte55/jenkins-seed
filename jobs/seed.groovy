@@ -1,6 +1,8 @@
 import org.yaml.snakeyaml.DumperOptions
 import org.yaml.snakeyaml.Yaml
 
+def out = readFileFromWorkspace('config/repos.yaml')
+print(out)
 File file = new File('../config/repos.yaml')
 String fileContent = file.text
 

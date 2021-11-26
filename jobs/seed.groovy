@@ -1,7 +1,7 @@
 def repos = [
-  {
+  [
     'name': 'aieng-james-test'
-  }
+  ]
 ]
 repos.each{ repo -> 
   def repoUrl = "https://github.com/sky-uk/${repo.name}"

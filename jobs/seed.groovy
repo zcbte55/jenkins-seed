@@ -11,7 +11,7 @@ def repos = yaml.load(fileContent)
 print(repos['repos'])
 print(repos['repos'][0])
 
-repos.each{ repo -> 
+repos.eachWithIndex{ repo, i -> 
   print(repo)
   print(repo['name'])
   def repoUrl = "https://github.com/sky-uk/${repo['name']}"

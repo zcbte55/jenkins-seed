@@ -61,5 +61,8 @@ repos.each { repo ->
         numToKeep repo.getOrDefault('num-builds-to-keep', 10)
       }
     }
+    triggers {
+      cron "* * * * *"
+    }
   }
 }

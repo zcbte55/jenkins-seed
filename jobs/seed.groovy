@@ -26,6 +26,8 @@ def yaml = new Yaml(options)
 def config = yaml.load(configYaml)
 
 assert config.application == 'Sample App'
+
+print(config)
 def repos = [
   [
     'name': 'aieng-james-test'

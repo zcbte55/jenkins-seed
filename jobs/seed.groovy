@@ -13,7 +13,7 @@ def repos = config.get('repos')
 repos.each { repo ->
   def name = repo.get('name')
   def repoUrl  = repo.get('url')
-  def urlParts = repo.split('/')
+  def urlParts = repoUrl.split('/')
   def repoOrg = urlParts[3]
   def repoName = urlParts[4]
   

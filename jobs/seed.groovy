@@ -13,7 +13,7 @@ def repos = config.get('repos')
 repos.each { repo ->
   def name = repo.get('name')
   def repoUrl = repo.get('url')
-  def scriptPath = repo.get('script-path', 'Jenkinsfile')
+  def scriptFilePath = repo.get('script-path', 'Jenkinsfile')
   def includeBranches = repo.getOrDefault('include-branches', 'main PR-*')
   def excludeBranches = repo.getOrDefault('exclude-branches', '')
   def daysToKeep = repo.getOrDefault('days-to-keep', 7)
@@ -31,7 +31,7 @@ repos.each { repo ->
     displayName name
     factory {
       workflowBranchProjectFactory {
-        scriptPath(scriptPath)
+        scriptPath(scriptFilePath)
       }
     }
     branchSources {

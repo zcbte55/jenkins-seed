@@ -14,21 +14,22 @@ print(repos['repos'][0])
 repos.eachWithIndex{ repo, i -> 
   print(repo)
   print(repo['name'])
-  def repoUrl = "https://github.com/sky-uk/${repo['name']}"
+  def name = repo.get('name')
+  def repoUrl = "https://github.com/sky-uk/${name}"
   def folderName = 'Builds'
   folder(folderName) {
   }
 
-  multibranchPipelineJob("/${folderName}/${repo['name']}") {
-    displayName "${repo['name']}"
+  multibranchPipelineJob("/${folderName}/${name}") {
+    displayName "${name}"
     description "desc"
     branchSources {
       branchSource {
         source {
           github {
-            id "${folderName}/${repo['name']}"
+            id "${folderName}/${name}"
             repositoryUrl "${repoUrl}"
-            repository "${repo['name']}"
+            repository "${name}"
             repoOwner "sky-uk"
             credentialsId "github-bot"
             configuredByUrl true

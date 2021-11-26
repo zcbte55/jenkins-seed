@@ -1,23 +1,14 @@
 import org.yaml.snakeyaml.DumperOptions
 import org.yaml.snakeyaml.Yaml
 
-def out = readFileFromWorkspace('config/repos.yaml')
-print(out)
-File file = new File('../config/repos.yaml')
-String fileContent = file.text
+def fileContent = readFileFromWorkspace('config/repos.yaml')
 
 DumperOptions options = new DumperOptions()
 options.setDefaultFlowStyle(DumperOptions.FlowStyle.BLOCK)
 def yaml = new Yaml(options)
 
-def config = yaml.load(fileContent)
+def repos = yaml.load(fileContent)
 
-print(config)
-def repos = [
-  [
-    'name': 'aieng-james-test'
-  ]
-]
 repos.each{ repo -> 
   def repoUrl = "https://github.com/sky-uk/${repo.name}"
   def folderName = 'Builds'

@@ -76,9 +76,8 @@ repos.each { repo ->
         numToKeep buildsNumToKeep
       }
     }
-    parameters {
-      stringParam("MyVariable1", "my-value1")
-      stringParam("MyVariable2", "${my-dynamic-value2}")
+    properties {
+      customIcon('job.png')
     }
   }
 }

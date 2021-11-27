@@ -36,7 +36,7 @@ repos.each { repo ->
         pipelineTriggers {
           triggers {
             cron {
-              spec('* * * * *')
+              spec(cronTrigger)
             }
           }
         }

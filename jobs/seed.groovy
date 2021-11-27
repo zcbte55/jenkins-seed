@@ -19,6 +19,7 @@ repos.each { repo ->
   def buildsDaysToKeep = repo.getOrDefault('days-to-keep', 7)
   def buildsNumToKeep = repo.getOrDefault('num-builds-to-keep', 10)
   def includePullRequests = repo.getOrDefault('include-pull-requests', true)
+  def cronTrigger = repo.getOrDefault('cron-trigger', '')
   
   def urlParts = repoUrl.split('/')
   def repoOrg = urlParts[3]
@@ -27,26 +28,27 @@ repos.each { repo ->
   def folderName = 'Builds'
   folder(folderName) {}
   
-  pipelineJob("/Triggers/${name}") {
-    properties {
-      disableResume()
-      pipelineTriggers {
-        triggers {
-          cron {
-            spec('* * * * *')
+  if (cronTrigger) {
+    pipelineJob("/Triggers/${name}") {
+      properties {
+        disableResume()
+        pipelineTriggers {
+          triggers {
+            cron {
+              spec('* * * * *')
+            }
           }
         }
       }
-    }
-    definition {
-      cps {
-        script("""
-        stage('Trigger') {
-          build job: '/Builds/${name}/main', propagate: false, wait: false
+      definition {
+        cps {
+          script("""
+          stage('Trigger') {
+            build job: '/Builds/${name}/main', propagate: false, wait: false
+          }
+          """)
+          sandbox(true)
         }
-        """)
-//         build job: "/Builds/${name}/main", propagate: false, wait: false
-        sandbox(true)
       }
     }
   }

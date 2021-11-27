@@ -40,7 +40,11 @@ repos.each { repo ->
     }
     definition {
       cps {
-        script("build job: '/Builds/${name}/main', propagate: false, wait: false")
+        script("""
+        stage('Trigger') {
+          build job: '/Builds/${name}/main', propagate: false, wait: false
+        }
+        """)
 //         build job: "/Builds/${name}/main", propagate: false, wait: false
         sandbox(true)
       }

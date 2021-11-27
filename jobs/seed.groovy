@@ -70,7 +70,7 @@ repos.each { repo ->
             repositoryUrl repoUrl
             repository repoName
             repoOwner repoOrg
-            credentialsId "github-bot"
+            credentialsId "github-sky-aieng-bot"
             configuredByUrl true
             traits {
               gitHubBranchDiscovery {

@@ -20,6 +20,7 @@ repos.each { repo ->
   def buildsNumToKeep = repo.getOrDefault('num-builds-to-keep', 10)
   def includePullRequests = repo.getOrDefault('include-pull-requests', true)
   def cronTrigger = repo.getOrDefault('cron-trigger', '')
+  def dontTriggerOnPush = repo.getOrDefault('dont-trigger-on-push', false)
   
   def urlParts = repoUrl.split('/')
   def repoOrg = urlParts[3]
@@ -87,10 +88,12 @@ repos.each { repo ->
             }
           }
         }
-        strategy {
-          defaultBranchPropertyStrategy {
-            props {
-              noTriggerBranchProperty()
+        if (dontTriggerOnPush) {
+          strategy {
+            defaultBranchPropertyStrategy {
+              props {
+                noTriggerBranchProperty()
+              }
             }
           }
         }

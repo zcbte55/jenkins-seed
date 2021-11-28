@@ -88,7 +88,6 @@ repos.each { repo ->
             }
           }
         }
-        skipInitialBuildOnFirstBranchIndexing()
 
         if (dontTriggerOnPush) {
           strategy {
@@ -97,6 +96,14 @@ repos.each { repo ->
                 noTriggerBranchProperty()
               }
             }
+          }
+        }
+      }
+      
+      buildStrategies {
+        buildAllBranches {
+          strategies {
+            skipInitialBuildOnFirstBranchIndexing()
           }
         }
       }

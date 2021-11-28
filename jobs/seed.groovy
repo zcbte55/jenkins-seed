@@ -64,6 +64,14 @@ repos.each { repo ->
     }
     branchSources {
       branchSource {
+        
+        buildStrategies {
+          buildAllBranches {
+            strategies {
+              skipInitialBuildOnFirstBranchIndexing()
+            }
+          }
+        }
         source {
           github {
             id "${folderName}/${name}"
@@ -96,14 +104,6 @@ repos.each { repo ->
                 noTriggerBranchProperty()
               }
             }
-          }
-        }
-      }
-      
-      buildStrategies {
-        buildAllBranches {
-          strategies {
-            skipInitialBuildOnFirstBranchIndexing()
           }
         }
       }

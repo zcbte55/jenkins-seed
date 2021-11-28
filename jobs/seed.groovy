@@ -90,6 +90,7 @@ repos.each { repo ->
         }
         if (dontTriggerOnPush) {
           strategy {
+            skipInitialBuildOnFirstBranchIndexing()
             defaultBranchPropertyStrategy {
               props {
                 noTriggerBranchProperty()

@@ -78,7 +78,7 @@ repos.each { repo ->
               }
               if (includePullRequests) {
                 gitHubPullRequestDiscovery {
-                  strategyId(2)
+                  strategyId(1)
                 }
               }
               headWildcardFilter {

@@ -88,9 +88,10 @@ repos.each { repo ->
             }
           }
         }
+        skipInitialBuildOnFirstBranchIndexing()
+
         if (dontTriggerOnPush) {
           strategy {
-            skipInitialBuildOnFirstBranchIndexing()
             defaultBranchPropertyStrategy {
               props {
                 noTriggerBranchProperty()

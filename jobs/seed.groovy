@@ -55,7 +55,7 @@ repos.each { repo ->
   }
 
   // https://jenkinsci.github.io/job-dsl-plugin/#path/multibranchPipelineJob
-  multibranchPipelineJob("/${folderName}/${name}") {
+  multibranchPipelineJob("/${folderName}/${name}-${scriptFilePath}") {
     displayName name
     factory {
       workflowBranchProjectFactory {
@@ -74,7 +74,7 @@ repos.each { repo ->
         }
         source {
           github {
-            id "${folderName}/${name}"
+            id "${folderName}/${name}-${scriptFilePath}"
             repositoryUrl repoUrl
             repository repoName
             repoOwner repoOrg
